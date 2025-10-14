@@ -67,7 +67,10 @@ public class GhostTracking : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //GameOver scene
-        sprite.color = Color.red;
+        if (collision.gameObject == player)
+        {
+            sprite.color = Color.red;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
