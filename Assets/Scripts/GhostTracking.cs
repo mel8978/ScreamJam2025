@@ -1,14 +1,23 @@
 using UnityEngine;
 
-public class GhostManager : MonoBehaviour
+public class GhostTracking : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    int speed;
+
+    Rigidbody2D rb;
+
+    Vector2 playerPos;
+
+    [SerializeField]
+    GameObject player;
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        playerPos = player.transform.position;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         
