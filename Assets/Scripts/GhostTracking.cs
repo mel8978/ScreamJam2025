@@ -44,7 +44,11 @@ public class GhostTracking : MonoBehaviour
         {
             direction.y = 1.3f;
         }
-        else if (playerPos.y == rb.position.y)
+        if (Mathf.Abs(rb.position.x - playerPos.x) < 0.25)
+        {
+            direction.x = 0;
+        }
+        if (Mathf.Abs(rb.position.y - playerPos.y) < 0.25)
         {
             direction.y = 0;
         }
