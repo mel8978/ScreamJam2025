@@ -7,7 +7,7 @@ public class MouseController : MonoBehaviour
     BoxCollider2D boxCollider;
     SpriteRenderer spriteRenderer;
 
-    float timer;
+    float clickTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,7 +15,7 @@ public class MouseController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         boxCollider.enabled = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        timer = 0;
+        clickTimer = 0;
     }
 
     // Update is called once per frame
@@ -25,11 +25,11 @@ public class MouseController : MonoBehaviour
         mousePosition = (Vector2)Camera.main.ScreenToWorldPoint(mousePosition);
         transform.position = mousePosition;
 
-        if (timer > 0)
+        if (clickTimer > 0)
         {
-            timer -= Time.deltaTime;
+            clickTimer -= Time.deltaTime;
         }
-        if (timer <= 0 && boxCollider.enabled)
+        if (clickTimer <= 0 && boxCollider.enabled)
         {
             boxCollider.enabled = false;
             spriteRenderer.color = Color.white;
@@ -38,9 +38,9 @@ public class MouseController : MonoBehaviour
 
     public void OnClick(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed && timer <= 0)
+        if (context.phase == InputActionPhase.Performed && clickTimer <= 0)
         {
-            timer = 1;
+            clickTimer = 1;
             boxCollider.enabled = true;
             spriteRenderer.color = Color.green;
         }
@@ -51,6 +51,7 @@ public class MouseController : MonoBehaviour
         if (collision.tag == "Ghost")
         {
             Destroy(collision.gameObject);
+            CanvasController.score++;
         }        
     }
 }
