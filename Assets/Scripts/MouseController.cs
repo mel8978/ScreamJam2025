@@ -50,6 +50,9 @@ public class MouseController : MonoBehaviour
     {
         if (collision.tag == "Ghost")
         {
+            //Destroy is only temporary
+            //Click should freeze ghosts for a few seconds
+            //Kill ghosts by jumping
             Destroy(collision.gameObject);
             CanvasController.score++;
         }        
