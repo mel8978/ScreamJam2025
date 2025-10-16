@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GhostSpawner : MonoBehaviour
@@ -16,10 +18,13 @@ public class GhostSpawner : MonoBehaviour
 
     public static Vector3 playerPos;
 
+    public static List<GameObject> ghosts = new List<GameObject>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spawnTimer = 0;
+        ghosts.Add(Instantiate(ghost, new Vector3(0, 0, -20), Quaternion.identity));
     }
 
     // Update is called once per frame
@@ -33,7 +38,8 @@ public class GhostSpawner : MonoBehaviour
         }
         if (spawnTimer >= spawnTime)
         {
-            Instantiate(ghost, new Vector3(0, 0, -20), Quaternion.identity);
+            
+            ghosts.Add(Instantiate(ghost, new Vector3(0, 0, -20), Quaternion.identity));
             spawnTimer = 0;
         }
     }

@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GhostTracking : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class GhostTracking : MonoBehaviour
     Vector2 playerPos;
 
     SpriteRenderer sprite;
+
+    public static bool isFrozen = false;
 
     void Start()
     {
@@ -49,6 +53,14 @@ public class GhostTracking : MonoBehaviour
         {
             direction.y = 0;
         }
+        if (isFrozen)
+        {
+            speed = 0;
+        }
+        if (!isFrozen)
+        {
+            speed = 2;
+        }
     }
 
     private void FixedUpdate()
@@ -64,14 +76,25 @@ public class GhostTracking : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //GameOver scene
-        //if (collision.gameObject == player)
-        //{
-        //    sprite.color = Color.red;
-        //}
+        if (collision.tag == "Player")
+        {
+            sprite.color = Color.red;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         sprite.color = Color.white;
+    }
+
+    public void OnClick(InputAction.CallbackContext context)
+    {
+        foreach (GameObject ghost in GhostSpawner.ghosts)
+        {
+            if (InBoxDisplay.boxCollider.bounds.Contains(ghost.transform.position))
+            {
+                isFrozen = true;
+            }
+        }
     }
 }

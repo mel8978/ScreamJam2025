@@ -33,6 +33,7 @@ public class MouseController : MonoBehaviour
         {
             boxCollider.enabled = false;
             spriteRenderer.color = Color.white;
+            GhostTracking.isFrozen = false;
         }
     }
 
@@ -53,6 +54,7 @@ public class MouseController : MonoBehaviour
             //Destroy is only temporary
             //Click should freeze ghosts for a few seconds
             //Kill ghosts by jumping
+            GhostSpawner.ghosts.Remove(collision.gameObject);
             Destroy(collision.gameObject);
             CanvasController.score++;
         }        
