@@ -12,9 +12,6 @@ public class GhostTracking : MonoBehaviour
 
     Vector2 playerPos;
 
-    [SerializeField]
-    GameObject player;
-
     SpriteRenderer sprite;
 
     void Start()
@@ -26,7 +23,7 @@ public class GhostTracking : MonoBehaviour
 
     void Update()
     {
-        playerPos = player.transform.position;
+        playerPos = GhostSpawner.playerPos;
 
         if (playerPos.x < rb.position.x)
         {
@@ -67,10 +64,10 @@ public class GhostTracking : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //GameOver scene
-        if (collision.gameObject == player)
-        {
-            sprite.color = Color.red;
-        }
+        //if (collision.gameObject == player)
+        //{
+        //    sprite.color = Color.red;
+        //}
     }
 
     private void OnTriggerExit2D(Collider2D collision)
