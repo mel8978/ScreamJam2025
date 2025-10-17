@@ -89,12 +89,12 @@ public class GhostTracking : MonoBehaviour
 
     public void OnClick(InputAction.CallbackContext context)
     {
-        foreach (GameObject ghost in GhostSpawner.ghosts)
+        for (int i = 0; i < GhostSpawner.ghosts.Count; i++) 
         {
-            if (InBoxDisplay.boxCollider.bounds.Contains(ghost.transform.position))
-            {
-                isFrozen = true;
-            }
+            //if (InBoxDisplay.boxCollider.bounds.Contains(GhostSpawner.ghosts[i].transform.position))
+            //{
+            //    isFrozen = true;
+            //}
         }
     }
 }
