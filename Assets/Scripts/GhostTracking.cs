@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class GhostTracking : MonoBehaviour
 {
-    float speed = 2f;
+    float speed = 1.5f;
 
     Vector2 direction;
 
@@ -53,13 +53,16 @@ public class GhostTracking : MonoBehaviour
         {
             direction.y = 0;
         }
-        if (isFrozen)
+        foreach (GameObject ghost in GhostSpawner.ghostList)
         {
-            speed = 0;
-        }
-        if (!isFrozen)
-        {
-            speed = 2;
+            if (GhostSpawner.ghosts[ghost])
+            {
+                speed = 0;
+            }
+            if (!GhostSpawner.ghosts[ghost])
+            {
+                speed = 1.5f;
+            }
         }
     }
 
@@ -89,12 +92,12 @@ public class GhostTracking : MonoBehaviour
 
     public void OnClick(InputAction.CallbackContext context)
     {
-        for (int i = 0; i < GhostSpawner.ghosts.Count; i++) 
+        foreach (GameObject ghost in GhostSpawner.ghostList)
         {
-            //if (InBoxDisplay.boxCollider.bounds.Contains(GhostSpawner.ghosts[i].transform.position))
-            //{
-            //    isFrozen = true;
-            //}
+            if (InBoxDisplay.boxCollider.bounds.Contains(ghost.transform.position))
+            {
+                GhostSpawner.ghosts[ghost] = true;
+            }
         }
     }
 }

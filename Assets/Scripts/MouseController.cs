@@ -33,7 +33,10 @@ public class MouseController : MonoBehaviour
         {
             boxCollider.enabled = false;
             spriteRenderer.color = Color.white;
-            GhostTracking.isFrozen = false;
+            foreach (GameObject ghost in GhostSpawner.ghostList)
+            {
+                GhostSpawner.ghosts[ghost] = false;
+            }
         }
     }
 

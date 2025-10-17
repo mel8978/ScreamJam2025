@@ -1,11 +1,12 @@
-using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GhostSpawner : MonoBehaviour
 {
-    [SerializeField]
     float spawnTimer;
+
+    float waveTimer;
 
     [SerializeField]
     float spawnTime;
@@ -38,13 +39,22 @@ public class GhostSpawner : MonoBehaviour
     {
         playerPos = player.transform.position;
 
+        waveTimer += Time.deltaTime;
+
+        if (waveTimer >= 15)
+        {
+            spawnTime--;
+            waveTimer = 0; 
+        }
+
         if (spawnTimer < spawnTime)
         {
             spawnTimer += Time.deltaTime;
         }
         if (spawnTimer >= spawnTime)
         {
-            ghostList.Add(Instantiate(ghost, new Vector3(0, 0, -20), Quaternion.identity));
+            Vector3 spawnPos = new Vector3(UnityEngine.Random.Range(-9, 9), UnityEngine.Random.Range(-4, 5), -20);
+            ghostList.Add(Instantiate(ghost, spawnPos, Quaternion.identity));
             count++;
             ghosts.Add(ghostList[count], false);
             spawnTimer = 0;
